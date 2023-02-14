@@ -1,12 +1,16 @@
 import React from "react";
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const Secondary = () => {
+    const list = useSelector(s => s.nameList);
+
     return (
         <View>
-            <Text>
-                Secondary Page!
-            </Text>
+            <FlatList
+                data={list}
+                renderItem={({ item }) => <Text>{item}</Text>}
+            />
         </View>
     )
 }
