@@ -1,14 +1,22 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, TextInput, Button } from 'react-native';
+
+import { useDispatch } from 'react-redux';
 
 const Primary = () => {
 
     const [text, setText] = useState("");
+    const dispatch = useDispatch();
 
     const handleAdd = () => {
-        setText("")
-        console.log(text);
+        setText("");
+        dispatch({ type: 'ADD_NAME', payload: { name: text } });
     }
+
+    const handleClean = () => {
+        dispatch({ type: 'CLEAN_LIST' });
+    }
+
     return (
         <View>
             <View style={{ borderWidth: 1, margin: 10, padding: 5 }}>
@@ -19,6 +27,7 @@ const Primary = () => {
                 />
             </View>
             <Button title="Ekle" onPress={handleAdd} />
+            <Button title="Temizle" onPress={handleClean} color='red'/>
         </View>
     )
 }
